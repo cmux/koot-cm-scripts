@@ -1,0 +1,62 @@
+{
+    "name": "koot-cm-scripts",
+    "version": "0.1.0",
+    "description": "Koot.js scripts for Cheetah Mobile projects",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack",
+        "dev": "cross-env WEBPACK_BUILD_ENV=dev webpack",
+        "test": "jest __tests__/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cmux/koot-cm-scripts.git"
+    },
+    "keywords": [
+        "koot",
+        "cli"
+    ],
+    "author": "diablohu",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/cmux/koot-cm-scripts/issues"
+    },
+    "homepage": "https://github.com/cmux/koot-cm-scripts#readme",
+    "dependencies": {
+        "inquirer": "^7.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.6.2",
+        "@babel/preset-typescript": "^7.6.0",
+        "@types/inquirer": "^6.5.0",
+        "babel-loader": "^8.0.6",
+        "clean-webpack-plugin": "^3.0.0",
+        "cross-env": "^6.0.0",
+        "eslint": "^6.4.0",
+        "eslint-config-koot": "^1.5.0",
+        "husky": "^3.0.5",
+        "jest": "^24.9.0",
+        "lint-staged": "^9.4.0",
+        "prettier": "^1.18.2",
+        "prettier-eslint": "^9.0.0",
+        "typescript": "^3.6.3",
+        "webpack": "^4.41.0",
+        "webpack-cli": "^3.3.9"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,cjs,mjs,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write",
+            "git add"
+        ],
+        "*.{json,md,css,less,sass,scss}": [
+            "prettier --write",
+            "git add"
+        ]
+    }
+}
