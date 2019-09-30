@@ -23,7 +23,8 @@
     },
     "homepage": "https://github.com/cmux/koot-cm-scripts#readme",
     "dependencies": {
-        "inquirer": "^7.0.0"
+        "inquirer": "^7.0.0",
+        "yargs": "^14.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.6.2",
@@ -34,6 +35,7 @@
         "cross-env": "^6.0.0",
         "eslint": "^6.4.0",
         "eslint-config-koot": "^1.5.0",
+        "fs-extra": "^8.1.0",
         "husky": "^3.0.5",
         "jest": "^24.9.0",
         "lint-staged": "^9.4.0",
