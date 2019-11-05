@@ -5,56 +5,53 @@
 import { fork } from 'child_process';
 import path from 'path';
 
-// import inquirer from 'inquirer';
-// import inquirerWithCountdown from './libs/inquirer-with-countdown';
-
 (async (): Promise<void> => {
     const result = await new Promise((_resolve): void => {
         const inquirer = path.resolve(__dirname, '_inquirer.js');
+
         let resolved = false;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const resolve = (...args: any[]): void => {
             resolved = true;
             _resolve(...args);
         };
-        console.log({ inquirer });
-        const child = fork(inquirer, [], {
-            stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+
+        const child = fork(inquirer, ['auto-open-browser'], {
+            stdio: ['inherit', 'inherit', 'inherit', 'ipc']
         });
         child.on('message', message => {
             if (resolved) return;
-            console.log('message from child:', message);
-            resolve(message);
+            if (Array.isArray(/^SELECT::(.+)$/.exec(message))) {
+                clearTimeout(timeout);
+                resolve((/^SELECT::(.+)$/.exec(message) as string[])[1]);
+            } else {
+                clearTimeout(timeout);
+            }
         });
         child.on('close', () => {
+            clearTimeout(timeout);
             if (resolved) return;
-            resolve();
+            resolve(true);
         });
         child.on('exit', () => {
+            clearTimeout(timeout);
             if (resolved) return;
-            resolve();
+            resolve(true);
         });
         child.on('error', (...args) => {
+            clearTimeout(timeout);
             console.error(...args);
         });
+
+        const timeout = setTimeout(() => {
+            process.kill(child.pid);
+            // eslint-disable-next-line no-console
+            console.log(' ');
+            resolve(true);
+        }, 5000);
     });
 
-    console.log({ result });
-    // const arg = await inquirerWithCountdown<string>(
-    //     {
-    //         type: 'confirm',
-    //         name: 'open',
-    //         message: 'Auto-open browser?',
-    //         default: true
-    //     },
-    //     5 * 1000,
-    //     ''
-    // );
-
-    // console.warn({ arg });
-
-    // 结束进程
-    // process.kill(process.pid);
-
-    // return;
+    setTimeout(() => {
+        console.log({ result });
+    }, 100);
 })().catch(err => console.error(err));

@@ -32,8 +32,21 @@ module.exports = () => {
                     use: {
                         loader: 'babel-loader',
                         options: {
+                            cwd: __dirname,
                             cacheDirectory: true,
-                            presets: ['@babel/preset-typescript'],
+                            presets: [
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        modules: false,
+                                        exclude: [
+                                            '@babel/plugin-transform-regenerator',
+                                            '@babel/plugin-transform-async-to-generator'
+                                        ]
+                                    }
+                                ],
+                                '@babel/preset-typescript'
+                            ],
                             compact: 'auto'
                         }
                     }
@@ -65,7 +78,8 @@ module.exports = () => {
         performance: {
             maxEntrypointSize: 100 * 1024 * 1024,
             maxAssetSize: 100 * 1024 * 1024
-        }
+        },
+        node: { __dirname: false }
         // externals: {
         //     inquirer: 'commonjs inquirer'
         // }

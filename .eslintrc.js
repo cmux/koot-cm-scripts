@@ -1,4 +1,7 @@
 module.exports = {
     root: true,
-    extends: ['koot']
+    extends: ['koot'],
+    rules: {
+        'no-console': 0
+    }
 };

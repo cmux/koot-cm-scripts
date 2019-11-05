@@ -1,11 +1,12 @@
 {
     "name": "koot-cm-scripts",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Koot.js scripts for Cheetah Mobile projects",
     "main": "index.js",
     "scripts": {
         "build": "webpack",
         "dev": "cross-env WEBPACK_BUILD_ENV=dev webpack",
+        "up": "yarn upgrade-interactive --latest",
         "test": "jest __tests__/"
     },
     "repository": {
@@ -24,26 +25,26 @@
     "homepage": "https://github.com/cmux/koot-cm-scripts#readme",
     "dependencies": {
         "inquirer": "^7.0.0",
-        "yargs": "^14.0.0"
+        "yargs": "^14.2.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.6.2",
+        "@babel/core": "^7.6.4",
         "@babel/preset-typescript": "^7.6.0",
         "@types/inquirer": "^6.5.0",
         "babel-loader": "^8.0.6",
         "clean-webpack-plugin": "^3.0.0",
-        "cross-env": "^6.0.0",
-        "eslint": "^6.4.0",
+        "cross-env": "^6.0.3",
+        "eslint": "^6.6.0",
         "eslint-config-koot": "^1.5.0",
         "fs-extra": "^8.1.0",
-        "husky": "^3.0.5",
+        "husky": "^3.0.9",
         "jest": "^24.9.0",
-        "lint-staged": "^9.4.0",
+        "lint-staged": "^9.4.2",
         "prettier": "^1.18.2",
         "prettier-eslint": "^9.0.0",
-        "typescript": "^3.6.3",
-        "webpack": "^4.41.0",
-        "webpack-cli": "^3.3.9"
+        "typescript": "^3.6.4",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
     },
     "husky": {
         "hooks": {
